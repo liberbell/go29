@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"html/template"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -32,7 +34,10 @@ type application struct {
 }
 
 func (app application) serve() error {
-	srv :=
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%d", app.config.port),
+		Handler: app.routes(),
+	}
 }
 
 func main() {
