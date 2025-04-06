@@ -31,6 +31,10 @@ type application struct {
 	version       string
 }
 
+func (app application) serve() error {
+	srv :=
+}
+
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
