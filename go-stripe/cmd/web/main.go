@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"html/template"
+	"log"
+)
 
 const version = "1.0.0"
 const cssVersion = "1"
@@ -19,6 +22,8 @@ type config struct {
 }
 
 type application struct {
-	config  config
-	infoLog *log.Logger
+	config        config
+	infoLog       *log.Logger
+	errorLog      *log.Logger
+	templateCache map[string]*template.Template
 }
