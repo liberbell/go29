@@ -51,5 +51,6 @@ func main() {
 		infoLog:       infoLog,
 		errorLog:      errorLog,
 		templateCache: tc,
+		version:       version,
 	}
 }
