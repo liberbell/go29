@@ -41,7 +41,10 @@ func (app application) serve() error {
 		IdleTimeout:       30 * time.Second,
 		ReadTimeout:       10 * time.Second,
 		ReadHeaderTimeout: 5 * time.Second,
+		WriteTimeout:      5 * time.Second,
 	}
+
+	app.infoLog.Println("Starting HTTP Server on port %d", app.config.port)
 }
 
 func main() {
