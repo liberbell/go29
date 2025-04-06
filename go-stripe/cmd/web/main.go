@@ -45,6 +45,8 @@ func (app application) serve() error {
 	}
 
 	app.infoLog.Println("Starting HTTP Server in %s mode on port %d", app.config.env, app.config.port)
+
+	return srv.ListenAndServe()
 }
 
 func main() {
