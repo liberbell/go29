@@ -9,4 +9,6 @@ type templateData struct {
 	Warning         string
 	Error           string
 	IsAuthenticated int
+	API             string
+	CSSVersion      string
 }
