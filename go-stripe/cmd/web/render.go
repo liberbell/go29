@@ -43,4 +43,10 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 			return err
 		}
 	}
+
+	return nil
+}
+
+func (app *application)  {
+	
 }
