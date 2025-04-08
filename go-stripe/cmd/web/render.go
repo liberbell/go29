@@ -27,6 +27,6 @@ func (app *application) addDefaultData(td *templateData, r *http.Request) *templ
 	return td
 }
 
-func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, page string) {
+func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, page string, td *templateData, partials ...string) {
 
 }
