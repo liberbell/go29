@@ -32,4 +32,11 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 	var t *template.Template
 	var err error
 	templateToRender := fmt.Sprintf("tepmpaltes/%s.page.tmpl", page)
+
+	_, templateInMap := app.templateCache[templateToRender]
+	if app.config.env == "production" && templateInMap {
+		t = app.templateCache[templateToRender]
+	} else {
+		t, err = app.parseTemplate(partials)
+	}
 }
