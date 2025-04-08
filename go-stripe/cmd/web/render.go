@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"html/template"
+	"net/http"
 )
 
 type templateData struct {
@@ -21,3 +22,7 @@ type templateData struct {
 var functions = template.FuncMap{}
 
 var templateFS embed.FS
+
+func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
+	return td
+}
