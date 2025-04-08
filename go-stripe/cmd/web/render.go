@@ -47,6 +47,6 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 	return nil
 }
 
-func (app *application)  {
-	
+func (app *application) parseTemplate(partials, []string) {
+
 }
