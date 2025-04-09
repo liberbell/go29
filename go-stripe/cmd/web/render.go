@@ -63,4 +63,10 @@ func (app *application) parseTemplate(partials []string, page, templateData stri
 	} else {
 		t, err = template.New(fmt.Sprintf("%s.page.tmpl", page)).Funcs(functions).ParseFS(templateFS, "templates/base.layout.tmpl", templateData)
 	}
+	if err != nil {
+		app.errorLog.Println(err)
+		return nil, err
+	}
+	app.templateCache[templateToRender] = t
+	retun t, nil
 }
