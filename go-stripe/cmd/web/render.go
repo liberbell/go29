@@ -45,6 +45,11 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 		}
 	}
 
+	if td == nil {
+		td = &templateData{}
+	}
+	td.addDefaultData(td)
+
 	return nil
 }
 
