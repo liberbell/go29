@@ -48,7 +48,7 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 	if td == nil {
 		td = &templateData{}
 	}
-	td.addDefaultData(td)
+	td.addDefaultData(td, r)
 
 	return nil
 }
