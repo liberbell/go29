@@ -23,7 +23,8 @@ type templateData struct {
 
 var functions = template.FuncMap{}
 
-var templateFS embed.FS
+//go:embed templates
+var templatesFS embed.FS
 
 func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
 	return td
@@ -69,9 +70,9 @@ func (app *application) parseTemplate(partials []string, page, templateToRender 
 	}
 
 	if len(partials) > 0 {
-		t, err = template.New(fmt.Sprintf("%s.page.tmpl", page)).Funcs(functions).ParseFS(templateFS, "templates/base.layout.tmpl", strings.Join(partials, ","), templateToRender)
+		t, err = template.New(fmt.Sprintf("%s.page.tmpl", page)).Funcs(functions).ParseFS(templatesFS, "templates/base.layout.tmpl", strings.Join(partials, ","), templateToRender)
 	} else {
-		t, err = template.New(fmt.Sprintf("%s.page.tmpl", page)).Funcs(functions).ParseFS(templateFS, "templates/base.layout.tmpl", templateToRender)
+		t, err = template.New(fmt.Sprintf("%s.page.tmpl", page)).Funcs(functions).ParseFS(templatesFS, "templates/base.layout.tmpl", templateToRender)
 	}
 	if err != nil {
 		app.errorLog.Println(err)
