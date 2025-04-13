@@ -38,6 +38,8 @@ Virtual Terminal
 <script>
     let card;
     let stripe;
+    const cardMessage = document.getElementById('card-message');
+    const cardSuccess = document.getElementById('card-success');
     stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9');
     function val() {
         
@@ -65,7 +67,7 @@ Virtual Terminal
                 displayError.classList.add('d-none');
                 displayError.textContent = '';
             }
-        })
+        });
     })();
 </script>
 {{ end }}
