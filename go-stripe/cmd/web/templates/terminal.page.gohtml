@@ -43,14 +43,14 @@ Virtual Terminal
         
     }
     (function() {
-        const element = stripe.elements();
+        const elements = stripe.elements();
         const style = {
             base: {
                 fontsize: '16px',
                 lineheight: '24px',
             }
         };
-        cart = element.create('card', {
+        card = elements.create('card', {
             style: style,
             hidePostalCode: false,
         });
