@@ -52,7 +52,12 @@ Virtual Terminal
         };
         cart = element.create('card', {
             style: style,
-            hidePostalCode: true,
+            hidePostalCode: false,
+        });
+        card.mount('#card-element');
+
+        card.addEventListener('change', function (params) {
+            
         })
     })
 </script>
