@@ -61,8 +61,11 @@ Virtual Terminal
             if (event.error) {
                 displayError.classList.remove('d-none');
                 displayError.textContent = event.error.message;
+            } else {
+                displayError.classList.add('d-none');
+                displayError.textContent = '';
             }
         })
-    })
+    })();
 </script>
 {{ end }}
