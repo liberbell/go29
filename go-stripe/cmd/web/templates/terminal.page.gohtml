@@ -56,8 +56,12 @@ Virtual Terminal
         });
         card.mount('#card-element');
 
-        card.addEventListener('change', function (params) {
-            
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.classList.remove('d-none');
+                displayError.textContent = event.error.message;
+            }
         })
     })
 </script>
