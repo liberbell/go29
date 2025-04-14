@@ -53,6 +53,10 @@ Virtual Terminal
 
     function val() {
         let form = document.getElementById('charge_form')
+        if (form.checkVisibility() === false) {
+            form.classList.add('was-validated');
+            return false;
+        }
     }
     (function() {
         const elements = stripe.elements();
