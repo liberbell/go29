@@ -54,6 +54,8 @@ Virtual Terminal
     function val() {
         let form = document.getElementById('charge_form')
         if (form.checkVisibility() === false) {
+            this.event.preventDefault();
+            this.event.stopPropagation();
             form.classList.add('was-validated');
             return false;
         }
