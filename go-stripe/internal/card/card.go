@@ -13,3 +13,7 @@ type Transaction struct {
 	LastFour            string
 	BankReturnCode      string
 }
+
+func (c *Card) CreatePaymentIntent(amount int, currency string) (string, error) {
+
+}
