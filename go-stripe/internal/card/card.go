@@ -2,6 +2,7 @@ package card
 
 import (
 	"github.com/stripe/stripe-go/v82"
+	"github.com/stripe/stripe-go/v82/paymentintent"
 )
 
 type Card struct {
@@ -25,5 +26,10 @@ func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.Payment
 		Amount:   stripe.Int64(int64(amount)),
 		Currency: stripe.String(currency),
 	}
-	params.AddMetadata("key", "value")
+	// params.AddMetadata("key", "value")
+	pi, err := paymentintent.New(params)
+	if err != nil {
+		msg := ""
+		if stripeErr, ok := err.(*stripe.Error)
+	}
 }
