@@ -5,3 +5,9 @@ type Card struct {
 	Key      string
 	Currency string
 }
+
+type Transaction struct {
+	TransactionStatusID int
+	Amount              int
+	Currency            string
+}
