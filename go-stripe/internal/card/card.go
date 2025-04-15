@@ -1,5 +1,7 @@
 package card
 
+import "github.com/stripe/stripe-go"
+
 type Card struct {
 	Secret   string
 	Key      string
@@ -14,6 +16,6 @@ type Transaction struct {
 	BankReturnCode      string
 }
 
-func (c *Card) CreatePaymentIntent(amount int, currency string) (string, error) {
+func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.PaymentIntent, error, string) {
 
 }
