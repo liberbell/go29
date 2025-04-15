@@ -10,4 +10,6 @@ type Transaction struct {
 	TransactionStatusID int
 	Amount              int
 	Currency            string
+	LastFour            string
+	BankReturnCode      string
 }
