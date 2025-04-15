@@ -1,7 +1,6 @@
 package card
 
 import (
-	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/v82"
 )
 
