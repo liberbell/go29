@@ -35,3 +35,11 @@ func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.Payment
 		}
 	}
 }
+
+func cardErrorMessage(code stripe.ErrorCode) string {
+	var msg = ""
+	switch code {
+	case stripe.Err:
+
+	}
+}
