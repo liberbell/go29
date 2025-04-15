@@ -1,6 +1,9 @@
 package card
 
-import "github.com/stripe/stripe-go"
+import (
+	"github.com/stripe/stripe-go"
+	"github.com/stripe/stripe-go/v82"
+)
 
 type Card struct {
 	Secret   string
@@ -17,5 +20,11 @@ type Transaction struct {
 }
 
 func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.PaymentIntent, error, string) {
+	stripe.Key = c.Secret
 
+	params := &stripe.PaymentIntentParams{
+		Amount:   stripe.Int64(int64(amount)),
+		Currency: stripe.String(currency),
+	}
+	params.AddMetadata("key", "value")
 }
