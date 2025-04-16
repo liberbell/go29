@@ -19,6 +19,10 @@ type Transaction struct {
 	BankReturnCode      string
 }
 
+func (c *Card) Charge(currency string, amount int) (*stripe.PaymentIntent, string, error) {
+
+}
+
 func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.PaymentIntent, string, error) {
 	stripe.Key = c.Secret
 
