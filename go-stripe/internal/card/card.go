@@ -31,17 +31,19 @@ func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.Payment
 	if err != nil {
 		msg := ""
 		if stripeErr, ok := err.(*stripe.Error); ok {
-			msg = string(stripeErr.Code)
+			msg = cardErrorMessage(stripeErr.Code)
 		}
+		return nil, err, msg
 	}
 }
 
 func cardErrorMessage(code stripe.ErrorCode) string {
 	var msg = ""
 	switch code {
-	case stripe.ErrorCordCardDeclined:
+	case stripe.ErrorCodeCardDeclined:
 		msg = "Your card was declined."
 	case stripe.ErrorCodeExpiredCard:
+		msg = "Your card is expired."
 	default:
 		msg = "Your card was declined."
 	}
