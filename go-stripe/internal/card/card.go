@@ -19,7 +19,7 @@ type Transaction struct {
 	BankReturnCode      string
 }
 
-func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.PaymentIntent, error, string) {
+func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.PaymentIntent, string, error) {
 	stripe.Key = c.Secret
 
 	params := &stripe.PaymentIntentParams{
@@ -33,9 +33,9 @@ func (c *Card) CreatePaymentIntent(amount int, currency string) (*stripe.Payment
 		if stripeErr, ok := err.(*stripe.Error); ok {
 			msg = cardErrorMessage(stripeErr.Code)
 		}
-		return nil, err, msg
+		return nil, msg, err
 	}
-	return pi, nil, ""
+	return pi, "", nil
 }
 
 func cardErrorMessage(code stripe.ErrorCode) string {
