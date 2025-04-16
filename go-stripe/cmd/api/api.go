@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
+	"net/http"
 )
 
 const version = "1.0.0"
@@ -27,6 +29,13 @@ type application struct {
 	errorLog      *log.Logger
 	templateCache map[string]*template.Template
 	version       string
+}
+
+func (app *application) serve() error {
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%d", app.config.port),
+		Handler: app.routes(),
+	}
 }
 
 func main() {
