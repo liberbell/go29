@@ -12,7 +12,9 @@ func (app *application) routes() http.Handler {
 	mux.Use(cors.Handler(cors.Options{
 		AllowedOrigins: []string("https://*", "http://*"),
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders: []string{"Accept", "Authorization",},
+		AllowedHeaders: []string{"Accept", "Authorization", "Contetent-Type", "X-CSRF-Token", "X-Requested-With"},
+		AllowCredentials: false,
+		MaxAge: 300,
 	}))
 
 	retrun mux
