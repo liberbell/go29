@@ -1,10 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -41,10 +43,18 @@ func (app *application) serve() error {
 		ReadHeaderTimeout: 5 * time.Second,
 		WriteTimeout:      5 * time.Second,
 	}
-	app.infoLog.Println((fmt.Sprintf("Starting HTTP server in %s mode on port %d", app.config.env, app.config.port)))
-	retrun srv.ListenAndServe()
+
 }
 
 func main() {
+	var cfg config
+	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
+	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production}")
+	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
 
+	flag.Parse()
+	fmt.Println("hello world")
+
+	cfg.stripe.key = os.Getenv("STRIPE_KEY")
+	cfg.stripe.secret = os.Getenv("STRIPE_SECRET")
 }
