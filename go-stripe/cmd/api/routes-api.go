@@ -10,7 +10,9 @@ import (
 func (app *application) routes() http.Handler {
 	mux := chi.NewRouter()
 	mux.Use(cors.Handler(cors.Options{
-		AllowedOrigins: []string("https://*"),
+		AllowedOrigins: []string("https://*", "http://*"),
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders: []string{"Accept", "Authorization",},
 	}))
 
 	retrun mux
