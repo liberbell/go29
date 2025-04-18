@@ -5,9 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
-	"net/http"
 	"os"
-	"time"
 )
 
 const version = "1.0.0"
@@ -34,21 +32,9 @@ type application struct {
 	version       string
 }
 
-func (app *application) serve() error {
-	srv := &http.Server{
-		Addr:              fmt.Sprintf(":%d", app.config.port),
-		Handler:           app.routes(),
-		IdleTimeout:       30 * time.Second,
-		ReadTimeout:       10 * time.Second,
-		ReadHeaderTimeout: 5 * time.Second,
-		WriteTimeout:      5 * time.Second,
-	}
-
-}
-
 func main() {
 	var cfg config
-	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
+	flag.IntVar(&cfg.port, "port", 4001, "Server port to listen on")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production}")
 	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
 
