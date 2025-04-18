@@ -35,12 +35,20 @@ type application struct {
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4001, "Server port to listen on")
-	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production}")
-	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
+	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production|maintenance}")
 
 	flag.Parse()
 	fmt.Println("hello world")
 
 	cfg.stripe.key = os.Getenv("STRIPE_KEY")
 	cfg.stripe.secret = os.Getenv("STRIPE_SECRET")
+
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+
+	app := &application{
+		config:   cfg,
+		infoLog:  infoLog,
+		errorLog: errorLog,
+	}
 }
