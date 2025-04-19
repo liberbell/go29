@@ -25,4 +25,6 @@ func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request)
 	if err != nil {
 		app.errorLog.Println(err)
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
 }
