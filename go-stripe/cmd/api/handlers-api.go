@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type stripePayload struct {
@@ -23,6 +24,13 @@ func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request)
 	err := json.NewDecoder(r.Body).Decode(&payload)
 	if err != nil {
 		app.errorLog.Println(err)
+		return
+	}
+
+	amount, err := strconv.Atoi(payload.Amount)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
 	}
 
 	j := jsonResponse{
