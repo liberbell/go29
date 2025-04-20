@@ -46,6 +46,13 @@ func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request)
 		okay = false
 	}
 
+	if okay {
+		out, err := json.MarshalIndent(pi, "", " ")
+		if err != nil {
+			app.errorLog.Println(err)
+		}
+	}
+
 	j := jsonResponse{
 		OK: true,
 	}
