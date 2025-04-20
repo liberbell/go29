@@ -53,11 +53,11 @@ func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request)
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(out)
-}
-	}
-
+	} else {
 	j := jsonResponse{
-		OK: true,
+		OK: false,
+		Message: msg,
+
 	}
 	out, err := json.MarshalIndent(j, "", " ")
 	if err != nil {
