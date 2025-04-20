@@ -64,4 +64,5 @@ func cardErrorMessage(code stripe.ErrorCode) string {
 	default:
 		msg = "Your card was declined."
 	}
+	return msg
 }
