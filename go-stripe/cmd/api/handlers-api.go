@@ -19,7 +19,7 @@ type jsonResponse struct {
 	ID      int    `json:"id"`
 }
 
-func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request) {
+func (app *application) GetPayamentIntent(w http.ResponseWriter, r *http.Request) {
 	var payload stripePayload
 
 	err := json.NewDecoder(r.Body).Decode(&payload)
