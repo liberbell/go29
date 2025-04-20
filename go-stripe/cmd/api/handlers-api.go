@@ -19,7 +19,7 @@ type jsonResponse struct {
 	ID      int    `json:"id"`
 }
 
-func (app *application) GetPayamentIntent(w http.ResponseWriter, r *http.Request) {
+func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request) {
 	var payload stripePayload
 
 	err := json.NewDecoder(r.Body).Decode(&payload)
@@ -47,7 +47,7 @@ func (app *application) GetPayamentIntent(w http.ResponseWriter, r *http.Request
 	}
 
 	if okay {
-		out, err := json.MarshalIndent(pi, "", "  ")
+		out, err := json.MarshalIndent(pi, "", "   ")
 		if err != nil {
 			app.errorLog.Println(err)
 			return
@@ -60,7 +60,7 @@ func (app *application) GetPayamentIntent(w http.ResponseWriter, r *http.Request
 			Message: msg,
 			Content: "",
 		}
-		out, err := json.MarshalIndent(j, "", " ")
+		out, err := json.MarshalIndent(j, "", "  ")
 		if err != nil {
 			app.errorLog.Println(err)
 		}
