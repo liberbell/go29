@@ -11,15 +11,22 @@ type stripePayload struct {
 }
 
 type jsonResponse struct {
-	Ok      bool   `json:"ok"`
+	OK      bool   `json:"ok"`
 	Message string `json:"message"`
 	Content string `json:"content"`
 	ID      int    `json:"id"`
 }
 
 func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request) {
+	var payload stripePayload
+
+	err := json.NewDecoder(r.Body).Decode(&payload)
+	if err != nil {
+		app.errorLog.Println(err)
+	}
+
 	j := jsonResponse{
-		Ok: true,
+		OK: true,
 	}
 	out, err := json.MarshalIndent(j, "", " ")
 	if err != nil {
