@@ -17,7 +17,7 @@ func (app *application) routes() http.Handler {
 		MaxAge:           300,
 	}))
 
-	mux.Get("/api/payment-intent", app.GetPyamentIntent)
+	mux.Get("/api/payment-intent", app.GetPaymentIntent)
 
 	return mux
 }
