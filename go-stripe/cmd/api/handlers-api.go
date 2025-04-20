@@ -57,6 +57,7 @@ func (app *application) GetPyamentIntent(w http.ResponseWriter, r *http.Request)
 	j := jsonResponse{
 		OK: false,
 		Message: msg,
+		Content: "",
 
 	}
 	out, err := json.MarshalIndent(j, "", " ")
