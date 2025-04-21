@@ -85,6 +85,15 @@ Virtual Terminal
             body: JSON.stringify(payload),
         }
         fetch("http://localhost:4001/api/payment_intent", requestOptions)
+            .then(response => response.json())
+            .then(response => {
+                let data;
+                try {
+                    
+                } catch (err) {
+                    
+                }
+            })
     }
     
     (function() {
