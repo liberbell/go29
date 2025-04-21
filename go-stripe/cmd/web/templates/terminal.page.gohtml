@@ -95,7 +95,11 @@ Virtual Terminal
                         billing_details: {
                             name: document.getElementById('cardholder-name').value,
                         }
-                    }).then(function(result))
+                    }).then(function(result) {
+                        if (result.error) {
+                            showError(result.error.message);
+                        }
+                    })
                 } catch (err) {
                     console.log(err);
                 }
