@@ -89,9 +89,10 @@ Virtual Terminal
             .then(response => {
                 let data;
                 try {
-                    
+                    data = JSON.parse(response);
+                    console.log(data);
                 } catch (err) {
-                    
+                    console.log(err)
                 }
             })
     }
