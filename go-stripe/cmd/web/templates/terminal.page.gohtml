@@ -72,7 +72,16 @@ Virtual Terminal
         hidePayButton();
 
         let amountToCharge = String(parseFloat(document.getElementById('amount').value) * 100)
-        console.log(amountToCharge);
+        let payload = {
+            amount: amountToCharge,
+            currency: 'usd',
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+            }
+        }
     }
     
     (function() {
