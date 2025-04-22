@@ -105,6 +105,8 @@ Virtual Terminal
                                 document.getElementById('payment_intent').value = result.paymentIntent.id;
                                 document.getElementById('payment_amount').value = result.paymentIntent.amount;
                                 document.getElementById('payment-currency').value = result.paymentIntent.currency;
+                                processing.classList.add('d-none');
+                                showCardSuccess();
                             }
                         }
                     })
