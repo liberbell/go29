@@ -101,7 +101,8 @@ Virtual Terminal
                             showPayButton();
                         } else if (result.paymentIntent) {
                             if (result.paymentIntent.status === 'succeeded')
-
+                                document.getElementById('payment_method').value = result.paymentIntent.payment_method_types[0];
+                                document.getElementById('payment_intent').value = result.paymentIntent.id;
                             }
                         }
                     })
