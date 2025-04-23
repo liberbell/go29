@@ -60,7 +60,7 @@ Virtual Terminal
         processing.classList.remove('d-none');
     }
 
-    function showPayButton() { 
+    function showPayButtons() { 
         payButton.classList.remove('d-none');
         processing.classList.add('d-none');
     }
@@ -99,12 +99,12 @@ Virtual Terminal
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(payload),
         }
-        fetch("http://localhost:4001/api/payment_intent", requestOptions)
-            .then(response => response.json())
+        fetch("http://localhost:4001/api/payment-intent", requestOptions)
+            .then(response => response.text())
             .then(response => {
                 let data;
                 try {
