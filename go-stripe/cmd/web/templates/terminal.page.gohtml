@@ -72,6 +72,13 @@ Virtual Terminal
         cardMessages.innerText = msg;
     }
 
+    function showCardSuccess() {
+        cardMessages.classList.remove('alert-danger');
+        cardMessages.classList.add('alert-success');
+        cardMessages.classList.remove('d-none');
+        cardMessages.innerText = "Transaction successful.";
+    }
+
     function val() {
         let form = document.getElementById('charge_form')
         if (form.checkValidity() === false) {
