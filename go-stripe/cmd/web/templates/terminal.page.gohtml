@@ -116,7 +116,7 @@ Virtual Terminal
                         }
                     }).then(function(result) {
                         if (result.error) {
-                            showError(result.error.message);
+                            showCardError(result.error.message);
                             showPayButton();
                         } else if (result.paymentIntent) {
                             if (result.paymentIntent.status === 'succeeded')
