@@ -8,7 +8,7 @@ Virtual Terminal
 <h2 class="mt-3 text-center">Virtual Terminal</h2>
 <hr>
 <div class="alert alert-danger text-center d-none" id="card-messages"></div>
-<form action="/payment-succeeded" method="post" name="charge_form" id="charge_form" class="d-block needs-validation" autocomplete="off" novalidate="">
+<form action="/payment-succeeded" method="post" name="charge_form" id="charge_form" class="d-block needs-validation charge-form" autocomplete="off" novalidate="">
     <div class="mb-3">
         <label for="amount" class="form-label">Amount</label>
         <input type="text" class="form-control" id="amount" name="amount" required="" autocomplete="amount-new">
@@ -99,7 +99,7 @@ Virtual Terminal
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload),
         }
