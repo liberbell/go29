@@ -65,6 +65,11 @@ Virtual Terminal
         processing.classList.add('d-none');
     }
 
+    function showCardError(msg) {
+        cardMessages.classList.add('alert-danger');
+        cardMessages.classList.remove('alert-success');
+    }
+
     function val() {
         let form = document.getElementById('charge_form')
         if (form.checkValidity() === false) {
