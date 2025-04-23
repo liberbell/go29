@@ -68,6 +68,8 @@ Virtual Terminal
     function showCardError(msg) {
         cardMessages.classList.add('alert-danger');
         cardMessages.classList.remove('alert-success');
+        cardMessages.classList.remove('d-none');
+        cardMessages.innerText = msg;
     }
 
     function val() {
