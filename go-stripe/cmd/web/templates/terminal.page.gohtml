@@ -60,6 +60,11 @@ Virtual Terminal
         processing.classList.remove('d-none');
     }
 
+    function showPayButton() { 
+        payButton.classList.remove('d-none');
+        processing.classList.add('d-none');
+    }
+
     function val() {
         let form = document.getElementById('charge_form')
         if (form.checkValidity() === false) {
