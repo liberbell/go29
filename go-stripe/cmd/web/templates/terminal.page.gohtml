@@ -114,8 +114,8 @@ Virtual Terminal
                             card: card,
                             billing_details: {
                                 name: document.getElementById('cardholder-name').value,
+                            }
                         }
-                    }
                     }).then(function(result) {
                         if (result.error) {
                             showCardError(result.error.message);
