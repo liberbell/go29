@@ -80,7 +80,7 @@ Virtual Terminal
     }
 
     function val() {
-        let form = document.getElementById('charge_form')
+        let form = document.getElementById('charge_form');
         if (form.checkValidity() === false) {
             this.event.preventDefault();
             this.event.stopPropagation();
@@ -99,7 +99,7 @@ Virtual Terminal
             method: 'post',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload),
         }
