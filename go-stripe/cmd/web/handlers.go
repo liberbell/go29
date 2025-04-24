@@ -7,3 +7,7 @@ func (app *application) VirtualTerminal(w http.ResponseWriter, r *http.Request) 
 		app.errorLog.Println(err)
 	}
 }
+
+func (app *application) PaymentSuccdeded(w http.ResponseWriter, r *http.Request) {
+
+}
