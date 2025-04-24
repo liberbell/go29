@@ -34,7 +34,7 @@ type application struct {
 	version       string
 }
 
-func (app application) serve() error {
+func (app *application) serve() error {
 	srv := &http.Server{
 		Addr:              fmt.Sprintf(":%d", app.config.port),
 		Handler:           app.routes(),
@@ -54,10 +54,9 @@ func main() {
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production}")
 	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
-	flag.StringVar(&cfg.db.dsn, "dsn", "", "Database DSN connection string")
+	// flag.StringVar(&cfg.db.dsn, "dsn", "", "Database DSN connection string")
 
 	flag.Parse()
-	fmt.Println("hello world")
 
 	cfg.stripe.key = os.Getenv("STRIPE_KEY")
 	cfg.stripe.secret = os.Getenv("STRIPE_SECRET")
