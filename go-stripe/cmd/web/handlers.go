@@ -21,9 +21,11 @@ func (app *application) PaymentSuccdeded(w http.ResponseWriter, r *http.Request)
 	paymentAmount := r.Form.Get("payment_amount")
 	paymentCurrency := r.Form.Get("payment_currency")
 
-	data := make(map[string]inerface{})
+	data := make(map[string]interface{})
 	data["cardholder_name"] = cardHolder
 	data["email"] = email
 	data["payment_intent"] = paymentIntent
 	data["payment_method"] = paymentMethod
+	data["payent_amount"] = paymentAmount
+	data["payment_currency"] = paymentCurrency
 }
