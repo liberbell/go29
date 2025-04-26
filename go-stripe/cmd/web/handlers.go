@@ -22,10 +22,10 @@ func (app *application) PaymentSuccdeded(w http.ResponseWriter, r *http.Request)
 	paymentCurrency := r.Form.Get("payment_currency")
 
 	data := make(map[string]interface{})
-	data["cardholder_name"] = cardHolder
+	data["cardholder"] = cardHolder
 	data["email"] = email
-	data["payment_intent"] = paymentIntent
-	data["payment_method"] = paymentMethod
-	data["payent_amount"] = paymentAmount
-	data["payment_currency"] = paymentCurrency
+	data["pi"] = paymentIntent
+	data["pm"] = paymentMethod
+	data["pa"] = paymentAmount
+	data["pc"] = paymentCurrency
 }
