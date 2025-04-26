@@ -24,4 +24,6 @@ func (app *application) PaymentSuccdeded(w http.ResponseWriter, r *http.Request)
 	data := make(map[string]inerface{})
 	data["cardholder_name"] = cardHolder
 	data["email"] = email
+	data["payment_intent"] = paymentIntent
+	data["payment_method"] = paymentMethod
 }
