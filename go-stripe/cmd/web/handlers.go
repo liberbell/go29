@@ -33,6 +33,6 @@ func (app *application) PaymentSuccdeded(w http.ResponseWriter, r *http.Request)
 		Data: data,
 	}); err != nil {
 		app.errorLog.Println(err)
-		return err
+		return
 	}
 }
