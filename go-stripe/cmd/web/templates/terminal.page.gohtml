@@ -104,7 +104,7 @@ Virtual Terminal
             },
             body: JSON.stringify(payload),
         }
-        fetch("{{ index .stringMap 'published_key' }}", requestOptions)
+        fetch("{{ index .stringMap 'publishable_key' }}", requestOptions)
             .then(response => response.text())
             .then(response => {
                 let data;
