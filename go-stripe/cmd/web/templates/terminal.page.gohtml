@@ -53,7 +53,8 @@ Virtual Terminal
     const payButton = document.getElementById('pay-button');
     const processing = document.getElementById('processing-payment');
 
-    stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9');
+    // stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9');
+    stripe = Stripe({{.API}});
 
     function hidePayButton() { 
         payButton.classList.add('d-none');
@@ -103,7 +104,7 @@ Virtual Terminal
             },
             body: JSON.stringify(payload),
         }
-        fetch("http://localhost:4001/api/payment-intent", requestOptions)
+        fetch("{{ index .stringMap 'published_key' }}", requestOptions)
             .then(response => response.text())
             .then(response => {
                 let data;
