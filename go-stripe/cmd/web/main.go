@@ -67,8 +67,9 @@ func main() {
 
 	conn, err := driver.OpenDB(cfg.db.dsn)
 	if err != nil {
-		return nil, err
+		errorLog.Fatal(err)
 	}
+	defer conn.Close()
 
 	tc := make(map[string]*template.Template)
 
