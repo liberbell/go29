@@ -17,4 +17,5 @@ func OpenDB(dsn string) (*sql.DB, error) {
 		fmt.Println(err)
 		return nil, err
 	}
+	return db, nil
 }
