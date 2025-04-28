@@ -4,6 +4,7 @@ import (
 	"database/sql/driver"
 	"flag"
 	"fmt"
+	"go-stripe/internal/driver"
 	"html/template"
 	"log"
 	"net/http"
@@ -81,7 +82,7 @@ func main() {
 		version:       version,
 	}
 
-	err := app.serve()
+	err = app.serve()
 	if err != nil {
 		app.errorLog.Println(err)
 		log.Fatal(err)
