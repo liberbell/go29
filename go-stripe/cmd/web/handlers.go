@@ -39,3 +39,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		app.errorLog.Println(err)
 	}
 }
+
+func (app *application) ChangeOnce(w http.ResponseWriter, r *http.Request) {
+
+}
