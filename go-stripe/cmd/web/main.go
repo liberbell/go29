@@ -47,7 +47,7 @@ func (app *application) serve() error {
 		WriteTimeout:      5 * time.Second,
 	}
 
-	app.infoLog.Println(fmt.Sprintf("Starting HTTP Server in %s mode on port %d", app.config.env, app.config.port))
+	app.infoLog.Printf("Starting HTTP Server in %s mode on port %d\n", app.config.env, app.config.port)
 
 	return srv.ListenAndServe()
 }
