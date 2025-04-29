@@ -4,12 +4,13 @@ import (
 	"database/sql/driver"
 	"flag"
 	"fmt"
-	"go-stripe/internal/driver"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/go-stripe/internal/driver"
 )
 
 const version = "1.0.0"
