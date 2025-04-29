@@ -1,7 +1,7 @@
 package main
 
 import (
-	"database/sql/driver"
+	"database/sql"
 	"flag"
 	"fmt"
 	"html/template"
@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-stripe/internal/driver"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const version = "1.0.0"
@@ -52,6 +52,19 @@ func (app *application) serve() error {
 	return srv.ListenAndServe()
 }
 
+func OpenDB(dsn string) (*sql.DB, error) {
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		return nil, err
+	}
+	err = db.Ping()
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	return db, nil
+}
+
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
@@ -67,7 +80,7 @@ func main() {
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
-	conn, err := driver.OpenDB(cfg.db.dsn)
+	conn, err := OpenDB(cfg.db.dsn)
 	if err != nil {
 		errorLog.Fatal(err)
 	}
