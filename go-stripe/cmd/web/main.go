@@ -53,7 +53,8 @@ func (app *application) serve() error {
 }
 
 func OpenDB(dsn string) (*sql.DB, error) {
-	db, err := sql.Open("mysql", dsn)
+	// db, err := sql.Open("mysql", dsn)
+	db, err := sql.Open("mysql", "james:secret@/widgets?parseTime=true&tls=false")
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +69,7 @@ func OpenDB(dsn string) (*sql.DB, error) {
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
-	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production}")
+	flag.StringVar(&cfg.env, "env", "development", "Application environment {development|production}")
 	flag.StringVar(&cfg.db.dsn, "dsn", "james:secret@/widgets?parseTime=true&tls=false", "DSN")
 	// flag.StringVar(&cfg.db.dsn, "dsn", "trevor:secret@tcp(localhost:3306)/widgets?parseTime=true&tls=false", "DSN")
 	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
