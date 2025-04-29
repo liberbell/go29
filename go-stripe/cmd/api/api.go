@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"os"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const version = "1.0.0"
