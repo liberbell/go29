@@ -40,6 +40,8 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-func (app *application) ChangeOnce(w http.ResponseWriter, r *http.Request) {
-
+func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
+	if err := app.renderTemplate(w, r, "charge-once"){
+		return nil, err
+	}
 }
