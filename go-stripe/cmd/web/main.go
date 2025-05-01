@@ -73,7 +73,7 @@ func main() {
 	flag.StringVar(&cfg.db.dsn, "dsn", "james:secret@/widgets?parseTime=true&tls=false", "DSN")
 	// flag.StringVar(&cfg.db.dsn, "dsn", "trevor:secret@tcp(localhost:3306)/widgets?parseTime=true&tls=false", "DSN")
 	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
-	fmt.Println(cfg.db.dsn)
+	// fmt.Println(cfg.db.dsn)
 
 	flag.Parse()
 
