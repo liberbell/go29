@@ -15,7 +15,7 @@ func (app *application) routes() http.Handler {
 	mux.Get("/charge-once", app.ChargeOnce)
 
 	fileserver := http.FileServer(http.Dir("./static"))
-	mux.Handle("./static/*", http.StripPrefix("./static", fileserver))
+	mux.Handle("/static/*", http.StripPrefix("/static", fileserver))
 
 	return mux
 }
