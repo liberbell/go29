@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"myapp/internal/models"
+	"net/http"
+)
 
 func (app *application) VirtualTerminal(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
@@ -41,6 +44,8 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 }
 
 func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
+
+	widget := models.Widget
 	if err := app.renderTemplate(w, r, "buy-once", nil, "stripe-js"); err != nil {
 		app.errorLog.Println(err)
 	}
