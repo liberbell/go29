@@ -2,6 +2,7 @@ package models
 
 import (
 	"database/sql"
+	"time"
 )
 
 type DBmodels struct {
@@ -19,7 +20,11 @@ func NewModels(db *sql.DB) Models {
 }
 
 type Widget struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	ID             int       `json:"id"`
+	Name           string    `json:"name"`
+	Description    string    `json:"description"`
+	InventoryLevel int       `json:"inventory_level"`
+	Price          int       `json:"price"`
+	CreatedAt      time.Time `json:"-"`
+	UpdatedAt      time.Time `json:"-"`
 }
