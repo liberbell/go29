@@ -19,6 +19,7 @@ func NewModels(db *sql.DB) Models {
 	}
 }
 
+// Widget type
 type Widget struct {
 	ID             int       `json:"id"`
 	Name           string    `json:"name"`
