@@ -54,7 +54,9 @@ func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
 	data["widget"] = widget
 
-	if err := app.renderTemplate(w, r, "buy-once", nil, "stripe-js"); err != nil {
+	if err := app.renderTemplate(w, r, "buy-once", &templateData{
+		Data: data,
+	}, "stripe-js"); err != nil {
 		app.errorLog.Println(err)
 	}
 }
