@@ -15,11 +15,13 @@
     <form action="/payment-succeeded" method="post" name="charge_form" id="charge_form" class="d-block needs-validation charge-form" autocomplete="off" novalidate="">
 
         <input type="hidden" name="product_id" value="{{ $widget.ID }}">
-        
-        <div class="mb-3">
+        <input type="hidden" name="product_price" value="{{ $widget.Price }}">
+
+        <!-- <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
             <input type="text" class="form-control" id="amount" name="amount" required="" autocomplete="amount-new">
-        </div>
+        </div> -->
+
         <div class="mb-3">
             <label for="cardholder-name" class="form-label">Cardholder Name</label>
             <input type="text" class="form-control" id="cardholder-name" name="cardholder_name" required="" autocomplete="cardholder-name-new">
