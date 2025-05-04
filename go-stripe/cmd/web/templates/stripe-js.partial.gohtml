@@ -8,8 +8,8 @@
     const payButton = document.getElementById('pay-button');
     const processing = document.getElementById('processing-payment');
 
-    stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9');
-    // stripe = Stripe({{.API}});
+    /* stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9'); */
+    stripe = Stripe({{.StripePublishableKey}});
 
     function hidePayButton() { 
         payButton.classList.add('d-none');
