@@ -19,7 +19,6 @@ type templateData struct {
 	IsAuthenticated      int
 	API                  string
 	CSSVersion           string
-	StringSecretKey      string
 	StripeSecretKey      string
 	StripePublishableKey string
 }
@@ -34,7 +33,7 @@ func formatCurrency(n int) string {
 }
 
 //go:embed templates
-var templatesFS embed.FS
+var templateFS embed.FS
 
 func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
 	td.API = app.config.api
@@ -83,9 +82,9 @@ func (app *application) parseTemplate(partials []string, page, templateToRender 
 	}
 
 	if len(partials) > 0 {
-		t, err = template.New(fmt.Sprintf("%s.page.gohtml", page)).Funcs(functions).ParseFS(templatesFS, "templates/base.layout.gohtml", strings.Join(partials, ","), templateToRender)
+		t, err = template.New(fmt.Sprintf("%s.page.gohtml", page)).Funcs(functions).ParseFS(templateFS, "templates/base.layout.gohtml", strings.Join(partials, ","), templateToRender)
 	} else {
-		t, err = template.New(fmt.Sprintf("%s.page.gohtml", page)).Funcs(functions).ParseFS(templatesFS, "templates/base.layout.gohtml", templateToRender)
+		t, err = template.New(fmt.Sprintf("%s.page.gohtml", page)).Funcs(functions).ParseFS(templateFS, "templates/base.layout.gohtml", templateToRender)
 	}
 	if err != nil {
 		app.errorLog.Println(err)
