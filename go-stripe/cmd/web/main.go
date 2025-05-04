@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"myapp/internal/models"
 	"net/http"
 	"os"
 	"time"
@@ -35,6 +36,7 @@ type application struct {
 	errorLog      *log.Logger
 	templateCache map[string]*template.Template
 	version       string
+	DB            models.DBmodels
 }
 
 func (app *application) serve() error {
@@ -97,6 +99,7 @@ func main() {
 		errorLog:      errorLog,
 		templateCache: tc,
 		version:       version,
+		DB:            models.DBmodels{DB: conn},
 	}
 
 	err = app.serve()
