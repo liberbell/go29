@@ -36,7 +36,7 @@ type application struct {
 	errorLog      *log.Logger
 	templateCache map[string]*template.Template
 	version       string
-	DB            models.DBmodels
+	DB            models.DBmodel
 }
 
 func (app *application) serve() error {
