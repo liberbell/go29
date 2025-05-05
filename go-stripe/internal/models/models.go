@@ -41,4 +41,5 @@ func (m *DBmodel) GetWidget(id int) (Widget, error) {
 	if err != nil {
 		return widget, err
 	}
+	return widget, nil
 }
