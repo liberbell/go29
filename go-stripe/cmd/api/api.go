@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"myapp/internal/models"
 	"net/http"
 	"os"
 	"time"
@@ -31,6 +32,7 @@ type application struct {
 	infoLog  *log.Logger
 	errorLog *log.Logger
 	version  string
+	DB       models.DBmodel
 }
 
 func (app application) serve() error {
@@ -88,6 +90,7 @@ func main() {
 		infoLog:  infoLog,
 		errorLog: errorLog,
 		version:  version,
+		DB:       models.DBmodel{DB: conn},
 	}
 
 	err = app.serve()
