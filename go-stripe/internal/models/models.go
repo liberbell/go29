@@ -35,4 +35,12 @@ type Widget struct {
 
 func (m *DBmodel) GetWidget(id int) (Widget, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	var widget Widget
+	row := m.DB.QueryRowContext(ctx, "SELECT id, name FROM widgets WHERE id = ?", id)
+	err := row.Scan(&widget.ID, &widget.Name)
+	if err != nil {
+		return widget, err
+	}
 }
