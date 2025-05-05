@@ -8,8 +8,10 @@ import (
 	"myapp/internal/models"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
+	"github.com/go-chi/chi"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -100,5 +102,6 @@ func main() {
 }
 
 func (app *application) GetWidgetByID(w http.ResponseWriter, r *http.Request) {
-
+	id := chi.URLParam(r, "id")
+	widgetID, _ := strconv.Atoi(id)
 }
