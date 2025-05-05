@@ -5,17 +5,17 @@ import (
 	"time"
 )
 
-type DBmodels struct {
+type DBmodel struct {
 	DB *sql.DB
 }
 
 type Models struct {
-	DB DBmodels
+	DB DBmodel
 }
 
 func NewModels(db *sql.DB) Models {
 	return Models{
-		DB: DBmodels{DB: db},
+		DB: DBmodel{DB: db},
 	}
 }
 
@@ -28,4 +28,8 @@ type Widget struct {
 	Price          int       `json:"price"`
 	CreatedAt      time.Time `json:"-"`
 	UpdatedAt      time.Time `json:"-"`
+}
+
+func (m *DBmodel) GetWidget(id int) (widget, error) {
+
 }
