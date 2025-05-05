@@ -13,6 +13,7 @@ import (
 
 	"github.com/go-chi/chi"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/goccy/go-json"
 )
 
 const version = "1.0.0"
@@ -104,4 +105,15 @@ func main() {
 func (app *application) GetWidgetByID(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	widgetID, _ := strconv.Atoi(id)
+
+	widget, err := app.DB.GetWidget(widgetID)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+	out, err = json.MarshalIndent(widget, "", "   ")
+	if err != nil {
+		app.errorLog.Println(err)
+		return nil, err
+	}
 }
