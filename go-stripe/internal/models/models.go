@@ -1,8 +1,11 @@
 package models
 
 import (
+	"context"
 	"database/sql"
 	"time"
+
+	"golang.org/x/net/context"
 )
 
 type DBmodel struct {
@@ -30,6 +33,6 @@ type Widget struct {
 	UpdatedAt      time.Time `json:"-"`
 }
 
-func (m *DBmodel) GetWidget(id int) (widget, error) {
-
+func (m *DBmodel) GetWidget(id int) (Widget, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 }
