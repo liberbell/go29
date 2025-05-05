@@ -99,7 +99,7 @@ func main() {
 		errorLog:      errorLog,
 		templateCache: tc,
 		version:       version,
-		DB:            models.DBmodels{DB: conn},
+		DB:            models.DBmodel{DB: conn},
 	}
 
 	err = app.serve()
