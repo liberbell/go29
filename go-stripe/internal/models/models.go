@@ -4,8 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"time"
-
-	"golang.org/x/net/context"
 )
 
 type DBmodel struct {
