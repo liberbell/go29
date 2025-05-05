@@ -98,3 +98,7 @@ func main() {
 		log.Fatal(err)
 	}
 }
+
+func (app *application) GetWidgetByID(w http.ResponseWriter, r *http.Request) {
+
+}
