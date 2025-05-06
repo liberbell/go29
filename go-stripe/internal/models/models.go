@@ -59,6 +59,8 @@ type TransactionStatus struct {
 type Transaction struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`
+	Currency  string    `json:"currency"`
+	LastFour  string    `json:"last_four"`
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 }
