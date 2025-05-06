@@ -57,12 +57,14 @@ type TransactionStatus struct {
 }
 
 type Transaction struct {
-	ID        int       `json:"id"`
-	Name      string    `json:"name"`
-	Currency  string    `json:"currency"`
-	LastFour  string    `json:"last_four"`
-	CreatedAt time.Time `json:"-"`
-	UpdatedAt time.Time `json:"-"`
+	ID                  int       `json:"id"`
+	Name                string    `json:"name"`
+	Currency            string    `json:"currency"`
+	LastFour            string    `json:"last_four"`
+	BankReturnCode      string    `json:"bank_return_code"`
+	TransactionStatusID int       `json:"transaction_status_id"`
+	CreatedAt           time.Time `json:"-"`
+	UpdatedAt           time.Time `json:"-"`
 }
 
 func (m *DBmodel) GetWidget(id int) (Widget, error) {
