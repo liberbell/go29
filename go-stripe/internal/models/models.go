@@ -78,7 +78,7 @@ type User struct {
 	UpdatedAt time.Time `json:"-"`
 }
 
-func (m *DBmodel) GetWidget(id int) (Widget, error) {
+func (m *DBModel) GetWidget(id int) (Widget, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
