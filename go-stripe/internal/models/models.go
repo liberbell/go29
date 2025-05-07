@@ -91,7 +91,16 @@ func (m *DBmodel) GetWidget(id int) (Widget, error) {
 		WHERE
 			id = ?`,
 		id)
-	err := row.Scan(&widget.ID, &widget.Name)
+
+	err := row.Scan(
+		&widget.ID,
+		&widget.Name,
+		&widget.Description,
+		&widget.InventoryLevel,
+		&widget.Price,
+		&widget.CreatedAt,
+		&widget.UpdatedAt,
+	)
 	if err != nil {
 		return widget, err
 	}
