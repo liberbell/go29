@@ -83,7 +83,14 @@ func (m *DBmodel) GetWidget(id int) (Widget, error) {
 	defer cancel()
 
 	var widget Widget
-	row := m.DB.QueryRowContext(ctx, "SELECT id, name FROM widgets WHERE id = ?", id)
+	row := m.DB.QueryRowContext(ctx, `
+		SELECT
+			id, name, description, inventory_level, price, image, created_at, updated_at
+		FROM 
+			widgets
+		WHERE
+			id = ?`,
+		id)
 	err := row.Scan(&widget.ID, &widget.Name)
 	if err != nil {
 		return widget, err
