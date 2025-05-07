@@ -27,7 +27,7 @@ type Widget struct {
 	Description    string    `json:"description"`
 	InventoryLevel int       `json:"inventory_level"`
 	Price          int       `json:"price"`
-	ImageURL       string    `json:"image"`
+	Image          string    `json:"image"`
 	CreatedAt      time.Time `json:"-"`
 	UpdatedAt      time.Time `json:"-"`
 }
@@ -98,6 +98,7 @@ func (m *DBmodel) GetWidget(id int) (Widget, error) {
 		&widget.Description,
 		&widget.InventoryLevel,
 		&widget.Price,
+		&widget.Image,
 		&widget.CreatedAt,
 		&widget.UpdatedAt,
 	)
