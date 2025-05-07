@@ -67,11 +67,10 @@ func OpenDB(dsn string) (*sql.DB, error) {
 func main() {
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4001, "Server port to listen on")
-	flag.StringVar(&cfg.db.dsn, "dsn", "", "Database DSN connection string")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment{development|production|maintenance}")
+	flag.StringVar(&cfg.db.dsn, "dsn", "james:secret@tcp(localhost:3306)/widgets?parseTime=true&tls=false", "DSN")
 
 	flag.Parse()
-	fmt.Println("hello world")
 
 	cfg.stripe.key = os.Getenv("STRIPE_KEY")
 	cfg.stripe.secret = os.Getenv("STRIPE_SECRET")
