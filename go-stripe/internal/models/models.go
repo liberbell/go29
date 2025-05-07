@@ -6,17 +6,17 @@ import (
 	"time"
 )
 
-type DBmodel struct {
+type DBModel struct {
 	DB *sql.DB
 }
 
 type Models struct {
-	DB DBmodel
+	DB DBModel
 }
 
 func NewModels(db *sql.DB) Models {
 	return Models{
-		DB: DBmodel{DB: db},
+		DB: DBModel{DB: db},
 	}
 }
 

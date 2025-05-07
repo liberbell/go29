@@ -2,17 +2,14 @@ package main
 
 import (
 	"database/sql"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
 	"myapp/internal/models"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 
-	"github.com/go-chi/chi/v5"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -100,22 +97,4 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func (app *application) GetWidgetByID(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-	widgetID, _ := strconv.Atoi(id)
-
-	widget, err := app.DB.GetWidget(widgetID)
-	if err != nil {
-		app.errorLog.Println(err)
-		return
-	}
-	out, err := json.MarshalIndent(widget, "", "   ")
-	if err != nil {
-		app.errorLog.Println(err)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(out)
 }
