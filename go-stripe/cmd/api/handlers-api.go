@@ -62,7 +62,7 @@ func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request)
 			Message: msg,
 			Content: "",
 		}
-		out, err := json.MarshalIndent(j, "", "  ")
+		out, err := json.MarshalIndent(j, "", "   ")
 		if err != nil {
 			app.errorLog.Println(err)
 		}
