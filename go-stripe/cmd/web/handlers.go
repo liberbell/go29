@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 )
 
 func (app *application) VirtualTerminal(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +47,7 @@ func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	widgetID, _ := strconv.Atoi(id)
 
-	widgetID, err := app.DB.GetWidget(widgetID)
+	widget, err := app.DB.GetWidget(widgetID)
 	if err != nil {
 		app.errorLog.Println(err)
 		return
