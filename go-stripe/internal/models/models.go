@@ -107,3 +107,8 @@ func (m *DBModel) GetWidget(id int) (Widget, error) {
 	}
 	return widget, nil
 }
+
+func (m *DBModel) InsertTransaction(t *Transaction) (int, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+}
