@@ -48,8 +48,8 @@ Virtual Terminal
 {{ define "js" }}
 <script>
     document.getElementById("charge_amount", function(evt) {
-        if (evt.target.value) {
-            
+        if (evt.target.value != "") {
+            document.getElementById("amount").value = evt.target.value;
         }
     })
 </script>
