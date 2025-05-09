@@ -151,6 +151,7 @@ func (m *DBModel) InsertOrder(order Order) (int, error) {
 		order.WidgetID,
 		order.TransactionID,
 		order.StatusID,
+		order.Quantity,
 		order.Amount,
 		time.Now(),
 		time.Now(),
