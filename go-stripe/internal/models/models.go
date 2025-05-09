@@ -123,5 +123,16 @@ func (m *DBModel) InsertTransaction(txn *Transaction) (int, error) {
 		txn.LastFour,
 		txn.BankReturnCode,
 		txn.TransactionStatusID,
+		time.Now(),
+		time.Now(),
 	)
+
+	if err != nil {
+		return 0, err
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
 }
