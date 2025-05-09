@@ -59,7 +59,7 @@ type TransactionStatus struct {
 
 type Transaction struct {
 	ID                  int       `json:"id"`
-	Name                string    `json:"name"`
+	Amount              string    `json:"amount"`
 	Currency            string    `json:"currency"`
 	LastFour            string    `json:"last_four"`
 	BankReturnCode      string    `json:"bank_return_code"`
@@ -108,13 +108,13 @@ func (m *DBModel) GetWidget(id int) (Widget, error) {
 	return widget, nil
 }
 
-func (m *DBModel) InsertTransaction(t *Transaction) (int, error) {
+func (m *DBModel) InsertTransaction(txn *Transaction) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
 	stmt := `
 		INSERT INTO transactions 
-			(name, currency, last_four, bank_return_code, transaction_status_id, created_at, updated_at)
+			(amount, currency, last_four, bank_return_code, transaction_status_id, created_at, updated_at)
 		values (?, ?, ?, ?, ?, ?, ?)
 		`
 	result, err := m.DB.ExecContext(ctx, stmt,
