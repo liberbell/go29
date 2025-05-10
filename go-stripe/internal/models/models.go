@@ -59,7 +59,7 @@ type TransactionStatus struct {
 
 type Transaction struct {
 	ID                  int       `json:"id"`
-	Amount              string    `json:"amount"`
+	Amount              int       `json:"amount"`
 	Currency            string    `json:"currency"`
 	LastFour            string    `json:"last_four"`
 	BankReturnCode      string    `json:"bank_return_code"`
