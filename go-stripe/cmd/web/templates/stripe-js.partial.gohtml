@@ -1,56 +1,58 @@
 {{define "stripe-js"}}
+<script src="https://js.stripe.com/v3/"></script>
 
-<script src="https://js.stripe.com/v3"></script>
 <script>
     let card;
     let stripe;
-    const cardMessages = document.getElementById('card-messages');
-    const payButton = document.getElementById('pay-button');
-    const processing = document.getElementById('processing-payment');
+    const cardMessages = document.getElementById("card-messages");
+    const payButton = document.getElementById("pay-button");
+    const processing = document.getElementById("processing-payment");
 
-    stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9');
-    // stripe = Stripe({{.StripePublishableKey}});
+    stripe = Stripe({{.StripePublishableKey}});
+    {{/* stripe = Stripe('pk_test_51RAiiJQIYevZnwnf6k5vtRV78yxyQfnTaGfRJ4C6aShdwPF0jYyZaf33WivHo2XMW2ODZUSGGbya0qZ58KL2oYYm00fWUTFAD9'); */}}
 
-    function hidePayButton() { 
-        payButton.classList.add('d-none');
-        processing.classList.remove('d-none');
+    function hidePayButton() {
+        payButton.classList.add("d-none");
+        processing.classList.remove("d-none");
     }
 
-    function showPayButtons() { 
-        payButton.classList.remove('d-none');
-        processing.classList.add('d-none');
+    function showPayButtons() {
+        payButton.classList.remove("d-none");
+        processing.classList.add("d-none");
     }
 
     function showCardError(msg) {
-        cardMessages.classList.add('alert-danger');
-        cardMessages.classList.remove('alert-success');
-        cardMessages.classList.remove('d-none');
+        cardMessages.classList.add("alert-danger");
+        cardMessages.classList.remove("alert-success");
+        cardMessages.classList.remove("d-none");
         cardMessages.innerText = msg;
     }
 
     function showCardSuccess() {
-        cardMessages.classList.remove('alert-danger');
-        cardMessages.classList.add('alert-success');
-        cardMessages.classList.remove('d-none');
-        cardMessages.innerText = "Transaction successful.";
+        cardMessages.classList.remove("alert-danger");
+        cardMessages.classList.add("alert-success");
+        cardMessages.classList.remove("d-none");
+        cardMessages.innerText = "Transaction successful";
     }
 
     function val() {
-        let form = document.getElementById('charge_form');
+        let form = document.getElementById("charge_form");
         if (form.checkValidity() === false) {
             this.event.preventDefault();
             this.event.stopPropagation();
-            form.classList.add('was-validated');
+            form.classList.add("was-validated");
             return;
         }
-        form.classList.add('was-validated');
+        form.classList.add("was-validated");
         hidePayButton();
 
-        let amountToCharge = document.getElementById('amount').value;
+        let amountToCharge = document.getElementById("amount").value;
+        
         let payload = {
             amount: amountToCharge,
-            currency: 'usd',
+            currency: 'cad',
         }
+
         const requestOptions = {
             method: 'post',
             headers: {
@@ -60,8 +62,6 @@
             body: JSON.stringify(payload),
         }
 
-        // fetch("{{index .StringMap "publishable-key"}}", requestOptions)
-        {{/* fetch("http://localhost:4001/api/payment-intent", requestOptions) */}}
         fetch("{{.API}}/api/payment-intent", requestOptions)
             .then(response => response.text())
             .then(response => {
@@ -72,35 +72,37 @@
                         payment_method: {
                             card: card,
                             billing_details: {
-                                name: document.getElementById('cardholder-name').value,
+                                name: document.getElementById("cardholder-name").value,
                             }
                         }
                     }).then(function(result) {
                         if (result.error) {
+                            // card declined, or something went wrong with the card
                             showCardError(result.error.message);
                             showPayButtons();
-                        } else if (result.paymentIntent) {
-                            if (result.paymentIntent.status === 'succeeded'){
-                                document.getElementById('payment_method').value = result.paymentIntent.payment_method_types[0];
-                                document.getElementById('payment_intent').value = result.paymentIntent.id;
-                                document.getElementById('payment_amount').value = result.paymentIntent.amount;
-                                document.getElementById('payment_currency').value = result.paymentIntent.currency;
-                                processing.classList.add('d-none');
+                        } else if(result.paymentIntent) {
+                            if (result.paymentIntent.status === "succeeded") {
+                                // we have charged the card
+                                document.getElementById("payment_method").value = result.paymentIntent.payment_method_types[0];
+                                document.getElementById("payment_intent").value = result.paymentIntent.id;
+                                document.getElementById("payment_amount").value = result.paymentIntent.amount;
+                                document.getElementById("payment_currency").value = result.paymentIntent.currency;
+                                processing.classList.add("d-none");
                                 showCardSuccess();
-
-                                document.getElementById('charge_form').submit();
+                                document.getElementById("charge_form").submit();
                             }
                         }
                     })
                 } catch (err) {
                     console.log(err);
-                    showCardError("Invalid response from payment gateway.");
+                    showCardError("Invalid response from payment gateway!");
                     showPayButtons();
                 }
             })
     }
-    
+
     (function() {
+        // create stripe & elements
         const elements = stripe.elements();
         const style = {
             base: {
@@ -108,14 +110,17 @@
                 lineHeight: '24px'
             }
         };
+
+        // create card entry
         card = elements.create('card', {
             style: style,
             hidePostalCode: true,
         });
-        card.mount('#card-element');
+        card.mount("#card-element");
 
+        // check for input errors
         card.addEventListener('change', function(event) {
-            var displayError = document.getElementById('card-errors');
+            var displayError = document.getElementById("card-errors");
             if (event.error) {
                 displayError.classList.remove('d-none');
                 displayError.textContent = event.error.message;
@@ -126,4 +131,5 @@
         });
     })();
 </script>
+
 {{end}}
