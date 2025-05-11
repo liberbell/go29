@@ -53,13 +53,6 @@ func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// widget := models.Widget{
-	// 	ID:             1,
-	// 	Name:           "Custom Widget",
-	// 	Description:    "A very nice widget",
-	// 	InventoryLevel: 10,
-	// 	Price:          1000,
-	// }
 	data := make(map[string]interface{})
 	data["widget"] = widget
 
