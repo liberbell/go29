@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"myapp/internal/cards"
 	"net/http"
 	"strconv"
@@ -30,10 +31,15 @@ func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	amount, err := strconv.Atoi(payload.Amount)
-	if err != nil {
-		app.errorLog.Println(err)
-		return
+	if payload.Amount == "" {
+		fmt.Println("amount is empty")
+	} else {
+		amount, err := strconv.Atoi(payload.Amount)
+		if err != nil {
+			app.errorLog.Println(err)
+			return
+		}
+		return amount
 	}
 
 	card := cards.Card{
