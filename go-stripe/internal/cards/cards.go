@@ -52,6 +52,11 @@ func (c *Card) GetPaymentMethod(s string) (*stripe.PaymentMethod, error) {
 	return pm, nil
 }
 
+func (c *Card) GetPaymentIntent(id string) (*stripe.PaymentIntent, error) {
+	stripe.Key = c.Secret
+	pi, err := paymentintent.Get(id, nil)
+}
+
 func cardErrorMessage(code stripe.ErrorCode) string {
 	var msg = ""
 	switch code {
