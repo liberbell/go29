@@ -1,6 +1,7 @@
 package main
 
 import (
+	"myapp/internal/cards"
 	"net/http"
 	"strconv"
 
@@ -27,6 +28,10 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	paymentMethod := r.Form.Get("payment_method")
 	paymentAmount := r.Form.Get("payment_amount")
 	paymentCurrency := r.Form.Get("payment_currency")
+
+	card := cards.Card{
+		Secret: app.config.stripe.secret,
+	}
 
 	data := make(map[string]interface{})
 	data["cardholder"] = cardHolder
