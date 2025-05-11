@@ -49,6 +49,7 @@ func (c *Card) GetPaymentMethod(s string) (*stripe.PaymentMethod, error) {
 	if err != nil {
 		return nil, err
 	}
+	return pm, nil
 }
 
 func cardErrorMessage(code stripe.ErrorCode) string {
