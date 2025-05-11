@@ -31,7 +31,7 @@ func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	fmt.Println(payload.Amount)
+	fmt.Println("Amount:", payload.Amount)
 	amount, err := strconv.Atoi(payload.Amount)
 	if err != nil {
 		app.errorLog.Println(err)
