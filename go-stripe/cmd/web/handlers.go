@@ -31,6 +31,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 
 	card := cards.Card{
 		Secret: app.config.stripe.secret,
+		Key:    app.config.stripe.key,
 	}
 
 	data := make(map[string]interface{})
