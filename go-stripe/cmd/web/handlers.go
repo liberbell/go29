@@ -38,6 +38,11 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		app.errorLog.Println(err)
 		return
 	}
+	pm, err := card.GetPaymentMethod(paymentMethod)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
 
 	data := make(map[string]interface{})
 	data["cardholder"] = cardHolder
