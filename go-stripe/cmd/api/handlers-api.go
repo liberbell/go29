@@ -31,10 +31,12 @@ func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	var amount 
+
 	if payload.Amount == "" {
 		fmt.Println("amount is empty")
 	} else {
-		amount, err := strconv.Atoi(payload.Amount)
+		amount, err = strconv.Atoi(payload.Amount)
 		if err != nil {
 			app.errorLog.Println(err)
 			return
