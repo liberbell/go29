@@ -31,7 +31,7 @@ func (app *application) GetPaymentIntent(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	var amount 
+	var amount int
 
 	if payload.Amount == "" {
 		fmt.Println("amount is empty")
