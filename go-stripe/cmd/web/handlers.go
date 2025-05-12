@@ -45,7 +45,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}
 
 	lastFour := pm.Card.Last4
-	expiryMonty := pm.Card.ExpMonth
+	expiryMonth := pm.Card.ExpMonth
 	expiryYear := pm.Card.ExpYear
 
 	data := make(map[string]interface{})
@@ -56,7 +56,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	data["pa"] = paymentAmount
 	data["pc"] = paymentCurrency
 	data["last_four"] = lastFour
-	data["expiry_month"] = expiryMonty
+	data["expiry_month"] = expiryMonth
 	data["expiry_year"] = expiryYear
 	data["bank_return_code"] = pi.LatestCharge.ID
 
