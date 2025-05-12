@@ -55,6 +55,9 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	data["pm"] = paymentMethod
 	data["pa"] = paymentAmount
 	data["pc"] = paymentCurrency
+	data["last_four"] = lastFour
+	data["expiry_month"] = expiryMonty
+	data["expiry_year"] = expiryYear
 
 	if err := app.renderTemplate(w, r, "succeeded", &templateData{
 		Data: data,
