@@ -44,6 +44,10 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	lastFour := pm.Card.Last4
+	expiryMonty := pm.Card.ExpMonth
+	expiryYear := pm.Card.ExpYear
+
 	data := make(map[string]interface{})
 	data["cardholder"] = cardHolder
 	data["email"] = email
