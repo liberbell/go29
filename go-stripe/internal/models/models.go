@@ -188,11 +188,9 @@ func (m *DBModel) InsertCustomer(c Customer) (int, error) {
 		values (?, ?, ?, ?, ?)
 		`
 	result, err := m.DB.ExecContext(ctx, stmt,
-		order.WidgetID,
-		order.TransactionID,
-		order.StatusID,
-		order.Quantity,
-		order.Amount,
+		c.FirstName,
+		c.LastName,
+		c.Email,
 		time.Now(),
 		time.Now(),
 	)
