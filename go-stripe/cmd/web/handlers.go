@@ -83,7 +83,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-func (app *application) SaveCustomer(firstName, lastName, email) (id int, err error) {
+func (app *application) SaveCustomer(firstName, lastName, email string) (int, err) {
 	customer := cards.Customer{
 		FirstName: firstName,
 		LastName:  lastName,
@@ -93,9 +93,7 @@ func (app *application) SaveCustomer(firstName, lastName, email) (id int, err er
 	if err != nil {
 		return 0, err
 	}
-	stmt := `INSERT INTO customers (first_name, last_name, email) VALUES ($1, $2, $3) RETURNING id`
-	err = app.DB.QueryRow(stmt, firstName, lastName, email).Scan(&id)
-	return
+	return id, nil
 }
 
 func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
