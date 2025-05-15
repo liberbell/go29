@@ -2,6 +2,7 @@ package main
 
 import (
 	"myapp/internal/cards"
+	"myapp/internal/models"
 	"net/http"
 	"strconv"
 
@@ -83,13 +84,13 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-func (app *application) SaveCustomer(firstName, lastName, email string) (int, err) {
-	customer := cards.Customer{
+func (app *application) SaveCustomer(firstName, lastName, email string) (int, error) {
+	customer := models.Customer{
 		FirstName: firstName,
 		LastName:  lastName,
 		Email:     email,
 	}
-	id, err = app.DB.InsertCustomer(customer)
+	id, err := app.DB.InsertCustomer(customer)
 	if err != nil {
 		return 0, err
 	}
