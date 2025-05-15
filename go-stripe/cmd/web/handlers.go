@@ -56,11 +56,13 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	expiryMonth := pm.Card.ExpMonth
 	expiryYear := pm.Card.ExpYear
 
-	customer_id, err := app.SaveCustomer(firstName, lastName, email)
+	customerID, err := app.SaveCustomer(firstName, lastName, email)
 	if err != nil {
 		app.errorLog.Println(err)
 		return
 	}
+
+	app.infoLog.Print(customerID)
 
 	data := make(map[string]interface{})
 	data["cardholder"] = cardHolder
@@ -79,6 +81,21 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}); err != nil {
 		app.errorLog.Println(err)
 	}
+}
+
+func (app *application) SaveCustomer(firstName, lastName, email) (id int, err error) {
+	customer := cards.Customer{
+		FirstName: firstName,
+		LastName:  lastName,
+		Email:     email,
+	}
+	id, err = app.DB.InsertCustomer(customer)
+	if err != nil {
+		return 0, err
+	}
+	stmt := `INSERT INTO customers (first_name, last_name, email) VALUES ($1, $2, $3) RETURNING id`
+	err = app.DB.QueryRow(stmt, firstName, lastName, email).Scan(&id)
+	return
 }
 
 func (app *application) ChargeOnce(w http.ResponseWriter, r *http.Request) {
