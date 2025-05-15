@@ -57,6 +57,10 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	expiryYear := pm.Card.ExpYear
 
 	customer_id, err := app.SaveCustomer(firstName, lastName, email)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
 
 	data := make(map[string]interface{})
 	data["cardholder"] = cardHolder
