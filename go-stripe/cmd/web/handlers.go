@@ -66,11 +66,13 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 
 	amount, _ := strconv.Atoi(paymentAmount)
 	txn := models.Transaction{
-		Amount:      amount,
-		Currency:    paymentCurrency,
-		LastFour:    lastFour,
-		ExpiryMonth: int(expiryMonth),
-		ExpiryYear:  int(expiryYear),
+		Amount:              amount,
+		Currency:            paymentCurrency,
+		LastFour:            lastFour,
+		ExpiryMonth:         int(expiryMonth),
+		ExpiryYear:          int(expiryYear),
+		BankReturnCode:      pi.LatestCharge.ID,
+		TransactionStatusID: 2,
 	}
 
 	data := make(map[string]interface{})
