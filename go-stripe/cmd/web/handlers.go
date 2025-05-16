@@ -81,6 +81,15 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	func (app *application) SaveTransaction(txn models.Transaction) (int, error) {
+		id, err := app.DB.InsertTransaction(txn)
+		if err != nil {
+			return 0, err
+		}
+		return id, nil
+	}
+}
+
 	data := make(map[string]interface{})
 	data["email"] = email
 	data["pi"] = paymentIntent
