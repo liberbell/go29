@@ -31,7 +31,6 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	}
 	firstName := r.Form.Get("first_name")
 	lastName := r.Form.Get("last_name")
-	cardHolder := r.Form.Get("cardholder_name")
 	email := r.Form.Get("email")
 	paymentIntent := r.Form.Get("payment_intent")
 	paymentMethod := r.Form.Get("payment_method")
@@ -66,7 +65,6 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	app.infoLog.Print(customerID)
 
 	data := make(map[string]interface{})
-	data["cardholder"] = cardHolder
 	data["email"] = email
 	data["pi"] = paymentIntent
 	data["pm"] = paymentMethod
