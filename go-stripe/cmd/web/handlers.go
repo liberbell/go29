@@ -75,6 +75,12 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		TransactionStatusID: 2,
 	}
 
+	txnID, err := app.SaveTransaction(txn)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+
 	data := make(map[string]interface{})
 	data["email"] = email
 	data["pi"] = paymentIntent
