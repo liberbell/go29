@@ -8,7 +8,7 @@
     <h2 class="mt-5">Payment succeeded.</h2>
     <hr>
     <p>Payment intent: {{index .Data "pi"}}</p>
-    <p>Card holder: {{index .Data "cardholder"}}</p>
+    <p>Customer Name: {{index .Data "first_name"}} {{index .Data "last_name"}}</p>
     <p>E-mail: {{index .Data "email"}}</p>
     <p>Payment method: {{index .Data "pm"}}</p>
     <p>Payment Amount: {{index .Data "pa"}}</p>
