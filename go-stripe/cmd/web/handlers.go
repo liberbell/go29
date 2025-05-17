@@ -93,7 +93,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Now(),
 	}
-	_, err := app.SaveOrder(order)
+	_, err = app.SaveOrder(order)
 	if err != nil {
 		app.errorLog.Println(err)
 	}
@@ -108,6 +108,8 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	data["expiry_month"] = expiryMonth
 	data["expiry_year"] = expiryYear
 	data["bank_return_code"] = pi.LatestCharge.ID
+	data["first_name"] = firstName
+	data["last_name"] = lastName
 
 	if err := app.renderTemplate(w, r, "succeeded", &templateData{
 		Data: data,
