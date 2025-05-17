@@ -93,6 +93,10 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Now(),
 	}
+	_, err := app.SaveOrder(order)
+	if err != nil {
+		app.errorLog.Println(err)
+	}
 
 	data := make(map[string]interface{})
 	data["email"] = email
