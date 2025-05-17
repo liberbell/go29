@@ -107,6 +107,14 @@ func (app *application) SaveTransaction(txn models.Transaction) (int, error) {
 	return id, nil
 }
 
+func (app *application) SaveOrder(order models.Order) (int, error) {
+	id, err := app.DB.InsertOrder(order)
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
+}
+
 func (app *application) SaveCustomer(firstName, lastName, email string) (int, error) {
 	customer := models.Customer{
 		FirstName: firstName,
