@@ -36,6 +36,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	paymentMethod := r.Form.Get("payment_method")
 	paymentAmount := r.Form.Get("payment_amount")
 	paymentCurrency := r.Form.Get("payment_currency")
+	widgetID, _ := strconv.Atoi(r.Form.Get("product_id"))
 
 	card := cards.Card{
 		Secret: app.config.stripe.secret,
@@ -79,6 +80,10 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	if err != nil {
 		app.errorLog.Println(err)
 		return
+	}
+
+	order := models.Order{
+		WidgetID: ,
 	}
 
 	data := make(map[string]interface{})
