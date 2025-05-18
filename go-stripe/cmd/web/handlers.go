@@ -79,6 +79,9 @@ func (app *application) GetTransactionData(r *http.Request) (TransactionData, er
 		LastName:        lastName,
 		Email:           email,
 		PaymentIntentID: paymentIntent,
+		PaymentMethodID: paymentMethod,
+		PaymentAmount:   amount,
+		PaymentCurrency: paymentCurrency,
 	}
 
 }
