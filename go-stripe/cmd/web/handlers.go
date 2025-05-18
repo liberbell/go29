@@ -138,7 +138,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		CustomerID:    customerID,
 		StatusID:      1,
 		Quantity:      1,
-		Amount:        amount,
+		Amount:        txnData.PaymentAmount,
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Now(),
 	}
@@ -147,21 +147,20 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		app.errorLog.Println(err)
 	}
 
-	data := make(map[string]interface{})
-	data["email"] = email
-	data["pi"] = paymentIntent
-	data["pm"] = paymentMethod
-	data["pa"] = paymentAmount
-	data["pc"] = paymentCurrency
-	data["last_four"] = lastFour
-	data["expiry_month"] = expiryMonth
-	data["expiry_year"] = expiryYear
-	data["bank_return_code"] = pi.LatestCharge.ID
-	data["first_name"] = firstName
-	data["last_name"] = lastName
+	// data := make(map[string]interface{})
+	// data["email"] = email
+	// data["pi"] = paymentIntent
+	// data["pm"] = paymentMethod
+	// data["pa"] = paymentAmount
+	// data["pc"] = paymentCurrency
+	// data["last_four"] = lastFour
+	// data["expiry_month"] = expiryMonth
+	// data["expiry_year"] = expiryYear
+	// data["bank_return_code"] = pi.LatestCharge.ID
+	// data["first_name"] = firstName
+	// data["last_name"] = lastName
 
-	app.Session.Put(r.Context(), "receipt", data)
-
+	app.Session.Put(r.Context(), "receipt", txnData)
 	http.Redirect(w, r, "/receipt", http.StatusSeeOther)
 }
 
