@@ -39,11 +39,11 @@ type TransactionData struct {
 }
 
 func (app *application) GetTransactionData(r *http.Request) (TransactionData, error) {
-	var txndata TransactionData
+	var txnData TransactionData
 	err := r.ParseForm()
 	if err != nil {
 		app.errorLog.Println(err)
-		return txndata, err
+		return txnData, err
 	}
 
 	firstName := r.Form.Get("first_name")
@@ -62,19 +62,19 @@ func (app *application) GetTransactionData(r *http.Request) (TransactionData, er
 	pi, err := card.RetrievePaymentIntent(paymentIntent)
 	if err != nil {
 		app.errorLog.Println(err)
-		return txndata, err
+		return txnData, err
 	}
 	pm, err := card.GetPaymentMethod(paymentMethod)
 	if err != nil {
 		app.errorLog.Println(err)
-		return txndata, err
+		return txnData, err
 	}
 
 	lastFour := pm.Card.Last4
 	expiryMonth := pm.Card.ExpMonth
 	expiryYear := pm.Card.ExpYear
 
-	txndata = TransactionData{
+	txnData = TransactionData{
 		FirstName:       firstName,
 		LastName:        lastName,
 		Email:           email,
@@ -82,7 +82,12 @@ func (app *application) GetTransactionData(r *http.Request) (TransactionData, er
 		PaymentMethodID: paymentMethod,
 		PaymentAmount:   amount,
 		PaymentCurrency: paymentCurrency,
+		LastFour:        lastFour,
+		ExpiryMonth:     int(expiryMonth),
+		ExpiryYear:      int(expiryYear),
+		BankReturnCode:  pi.LatestCharge.ID,
 	}
+	return txnData, nil
 
 }
 
