@@ -74,7 +74,7 @@ func OpenDB(dsn string) (*sql.DB, error) {
 }
 
 func main() {
-	gob.Register(map[string]interface{}{})
+	gob.Register(TransactionData{})
 	var cfg config
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment {development|production}")
