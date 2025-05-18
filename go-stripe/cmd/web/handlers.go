@@ -46,26 +46,6 @@ func (app *application) GetTransactionData(r *http.Request) (TransactionData, er
 		return txndata, err
 	}
 
-	data.FirstName = r.Form.Get("first_name")
-	data.LastName = r.Form.Get("last_name")
-	data.Email = r.Form.Get("email")
-	data.PaymentIntentID = r.Form.Get("payment_intent")
-	data.PaymentMethodID = r.Form.Get("payment_method")
-	data.PaymentAmount, _ = strconv.Atoi(r.Form.Get("payment_amount"))
-	data.PaymentCurrency = r.Form.Get("payment_currency")
-	data.LastFour = r.Form.Get("last_four")
-	data.ExpiryMonth, _ = strconv.Atoi(r.Form.Get("expiry_month"))
-	data.ExpiryYear, _ = strconv.Atoi(r.Form.Get("expiry_year"))
-	data.BankReturnCode = r.Form.Get("bank_return_code")
-	return data, nil
-}
-
-func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		app.errorLog.Println(err)
-		return
-	}
 	firstName := r.Form.Get("first_name")
 	lastName := r.Form.Get("last_name")
 	email := r.Form.Get("email")
@@ -73,7 +53,7 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	paymentMethod := r.Form.Get("payment_method")
 	paymentAmount := r.Form.Get("payment_amount")
 	paymentCurrency := r.Form.Get("payment_currency")
-	widgetID, _ := strconv.Atoi(r.Form.Get("product_id"))
+	amount, _ := strconv.Atoi(paymentAmount)
 
 	card := cards.Card{
 		Secret: app.config.stripe.secret,
@@ -82,17 +62,35 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	pi, err := card.RetrievePaymentIntent(paymentIntent)
 	if err != nil {
 		app.errorLog.Println(err)
-		return
+		return txndata, err
 	}
 	pm, err := card.GetPaymentMethod(paymentMethod)
 	if err != nil {
 		app.errorLog.Println(err)
-		return
+		return txndata, err
 	}
 
 	lastFour := pm.Card.Last4
 	expiryMonth := pm.Card.ExpMonth
 	expiryYear := pm.Card.ExpYear
+
+	txndata = TransactionData{
+		FirstName:       firstName,
+		LastName:        lastName,
+		Email:           email,
+		PaymentIntentID: paymentIntent,
+	}
+
+}
+
+func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+
+	widgetID, _ := strconv.Atoi(r.Form.Get("product_id"))
 
 	customerID, err := app.SaveCustomer(firstName, lastName, email)
 	if err != nil {
@@ -102,7 +100,6 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 
 	app.infoLog.Print(customerID)
 
-	amount, _ := strconv.Atoi(paymentAmount)
 	txn := models.Transaction{
 		Amount:              amount,
 		Currency:            paymentCurrency,
