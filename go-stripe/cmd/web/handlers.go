@@ -113,6 +113,8 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 	data["first_name"] = firstName
 	data["last_name"] = lastName
 
+	app.Session.Put(r.Context(), "receipt", data)
+
 	if err := app.renderTemplate(w, r, "succeeded", &templateData{
 		Data: data,
 	}); err != nil {
