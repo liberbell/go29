@@ -171,29 +171,14 @@ func (app *application) VirtualTerminalPaymentSucceeded(w http.ResponseWriter, r
 		TransactionStatusID: 2,
 	}
 
-	_, err := app.SaveTransaction(txn)
+	_, err = app.SaveTransaction(txn)
 	if err != nil {
 		app.errorLog.Println(err)
 		return
 	}
 
-	order := models.Order{
-		WidgetID:      widgetID,
-		TransactionID: txnID,
-		CustomerID:    customerID,
-		StatusID:      1,
-		Quantity:      1,
-		Amount:        txnData.PaymentAmount,
-		CreatedAt:     time.Now(),
-		UpdatedAt:     time.Now(),
-	}
-	_, err = app.SaveOrder(order)
-	if err != nil {
-		app.errorLog.Println(err)
-	}
-
 	app.Session.Put(r.Context(), "receipt", txnData)
-	http.Redirect(w, r, "/receipt", http.StatusSeeOther)
+	http.Redirect(w, r, "/virtual-terminal-receipt", http.StatusSeeOther)
 }
 
 func (app *application) Receipt(w http.ResponseWriter, r *http.Request) {
