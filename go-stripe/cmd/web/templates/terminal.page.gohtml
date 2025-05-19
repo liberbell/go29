@@ -35,7 +35,7 @@ Virtual Terminal
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <input type="hidden" name="amount" id="amount">
+        <input type="text" name="amount" id="amount">
         <input type="hidden" name="payment_intent" id="payment_intent">
         <input type="hidden" name="payment_method" id="payment_method">
         <input type="hidden" name="payment_amount" id="payment_amount">
@@ -48,7 +48,7 @@ Virtual Terminal
 
 {{ define "js" }}
 <script>
-    document.getElementById("charge_amount").addEventListener("change",(e)=> {
+    document.getElementById("charge_amount").addEventListener("change", function(evt){
         if (evt.target.value !== "") {
             document.getElementById("amount").value = evt.target.value * 100;
         } else {
