@@ -50,7 +50,7 @@ Virtual Terminal
 <script>
     document.getElementById("charge_amount").addEventListener("change", function(evt){
         if (evt.target.value !== "") {
-            document.getElementById("amount").value = evt.target.value * 100;
+            document.getElementById("amount").value = parseInt((evt.target.value * 100), 10);
         } else {
             document.getElementById("amount").value = 0;
         }
