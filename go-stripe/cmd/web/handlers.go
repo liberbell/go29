@@ -147,18 +147,50 @@ func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request)
 		app.errorLog.Println(err)
 	}
 
-	// data := make(map[string]interface{})
-	// data["email"] = email
-	// data["pi"] = paymentIntent
-	// data["pm"] = paymentMethod
-	// data["pa"] = paymentAmount
-	// data["pc"] = paymentCurrency
-	// data["last_four"] = lastFour
-	// data["expiry_month"] = expiryMonth
-	// data["expiry_year"] = expiryYear
-	// data["bank_return_code"] = pi.LatestCharge.ID
-	// data["first_name"] = firstName
-	// data["last_name"] = lastName
+	app.Session.Put(r.Context(), "receipt", txnData)
+	http.Redirect(w, r, "/receipt", http.StatusSeeOther)
+}
+
+func (app *application) VirtualTerminalPaymentSucceeded(w http.ResponseWriter, r *http.Request) {
+
+	txnData, err := app.GetTransactionData(r)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+
+	txn := models.Transaction{
+		Amount:              txnData.PaymentAmount,
+		Currency:            txnData.PaymentCurrency,
+		LastFour:            txnData.LastFour,
+		ExpiryMonth:         txnData.ExpiryMonth,
+		ExpiryYear:          txnData.ExpiryYear,
+		BankReturnCode:      txnData.BankReturnCode,
+		PaymentIntent:       txnData.PaymentIntentID,
+		PaymentMethod:       txnData.PaymentMethodID,
+		TransactionStatusID: 2,
+	}
+
+	_, err := app.SaveTransaction(txn)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+
+	order := models.Order{
+		WidgetID:      widgetID,
+		TransactionID: txnID,
+		CustomerID:    customerID,
+		StatusID:      1,
+		Quantity:      1,
+		Amount:        txnData.PaymentAmount,
+		CreatedAt:     time.Now(),
+		UpdatedAt:     time.Now(),
+	}
+	_, err = app.SaveOrder(order)
+	if err != nil {
+		app.errorLog.Println(err)
+	}
 
 	app.Session.Put(r.Context(), "receipt", txnData)
 	http.Redirect(w, r, "/receipt", http.StatusSeeOther)
