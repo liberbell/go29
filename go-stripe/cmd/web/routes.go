@@ -17,6 +17,8 @@ func (app *application) routes() http.Handler {
 	mux.Post("/virtual-terminal-payment-succeeded", app.VirtualTerminalPaymentSucceeded)
 	mux.Get("/virtual-terminal-receipt", app.VirtualTerminalReceipt)
 
+	mux.Get("/plans/bronz", app.BronzPlan)
+
 	// mux.Get("/charge-once", app.ChargeOnce)
 	mux.Get("/widget/{id}", app.ChargeOnce)
 
