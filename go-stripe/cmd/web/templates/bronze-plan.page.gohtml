@@ -99,6 +99,20 @@
         cardMessages.innerText = "Transaction successful";
     }
 
+    function val() {
+        let form = document.getElementById("charge_form");
+        if (form.checkValidity() === false) {
+            this.event.preventDefault();
+            this.event.stopPropagation();
+            form.classList.add("was-validated");
+            return;
+        }
+        form.classList.add("was-validated");
+        hidePayButton();
+
+        let amountToCharge = document.getElementById("amount").value;
+    }
+
     (function() {
         // create stripe & elements
         const elements = stripe.elements();
