@@ -121,6 +121,15 @@
         }).then(stripePaymentMethodHandler);
     }
 
+    function stripePaymentMethodHandler(result) {
+
+        if (result.error) {
+            showCardError(result.error.message);
+        } else {
+            showCardSuccess();
+        }
+    }
+
     (function() {
         // create stripe & elements
         const elements = stripe.elements();
