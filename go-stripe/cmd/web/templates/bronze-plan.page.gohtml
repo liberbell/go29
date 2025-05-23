@@ -140,8 +140,12 @@
                 },
                 body: JSON.stringify(payload)
             }
-            fetch("{{.API}}/api/create-customer-and-subscribe-to-plan", requestOptions).then(response => response.json())
-            showCardSuccess();
+            fetch("{{.API}}/api/create-customer-and-subscribe-to-plan", requestOptions)
+            .then(response => response.json())
+            .then(function(data) { 
+                console.log(data);
+                processing.classList.add("d-none");
+             })
         }
     }
 
