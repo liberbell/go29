@@ -126,6 +126,11 @@
         if (result.error) {
             showCardError(result.error.message);
         } else {
+            let payload = {
+                plan: '{{ $widget.PlanID}}',
+                payment_method: result.payment_method.id,
+                email: document.getElementById("cardholder-email").value,
+            }
             showCardSuccess();
         }
     }
