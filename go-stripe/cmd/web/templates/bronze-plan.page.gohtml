@@ -140,6 +140,7 @@
                 },
                 body: JSON.stringify(payload)
             }
+            fetch("{{.API}}/api/create-customer-and-subscribe-to-plan", requestOptions).then(response => response.json())
             showCardSuccess();
         }
     }
