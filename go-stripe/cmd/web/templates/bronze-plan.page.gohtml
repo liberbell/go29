@@ -130,6 +130,15 @@
                 plan: '{{ $widget.PlanID}}',
                 payment_method: result.payment_method.id,
                 email: document.getElementById("cardholder-email").value,
+                last_four: result.payment_method.card.last4,
+            }
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             }
             showCardSuccess();
         }
