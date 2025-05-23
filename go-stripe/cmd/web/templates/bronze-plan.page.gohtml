@@ -118,14 +118,7 @@
             billing_details: {
                 name: document.getElementById("cardholder-name").value,
             },
-        }).then(stripePaymentMethodHandler => {
-            // Handle the response from Stripe
-            if (stripePaymentMethodHandler.error) {
-                showCardError(stripePaymentMethodHandler.error.message);
-            } else {
-                showCardSuccess();
-            }
-        });
+        }).then(stripePaymentMethodHandler);
     }
 
     (function() {
