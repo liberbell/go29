@@ -104,4 +104,8 @@ func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, 
 		app.errorLog.Println(err)
 		return
 	}
+	app.infoLog.Println(data.Email, data.LastFour, data.PaymentMethod, data.Plan)
+
+	okay := true
+	msg := ""
 }
