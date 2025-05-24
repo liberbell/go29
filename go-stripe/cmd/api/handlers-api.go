@@ -99,5 +99,9 @@ func (app *application) GetWidgetByID(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, r *http.Request) {
 	var data stripePayload
-
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
 }
