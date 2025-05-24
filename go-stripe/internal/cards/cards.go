@@ -61,6 +61,11 @@ func (c *Card) RetrievePaymentIntent(id string) (*stripe.PaymentIntent, error) {
 	return pi, nil
 }
 
+func (c *Card) CreateCustomer(pm, email string) (*stripe.Customer, string, error) {
+	stripe.Key = c.Secret
+
+}
+
 func cardErrorMessage(code stripe.ErrorCode) string {
 	var msg = ""
 	switch code {
