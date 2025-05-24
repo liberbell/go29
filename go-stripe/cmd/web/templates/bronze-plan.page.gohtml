@@ -112,11 +112,11 @@
 
         let amountToCharge = document.getElementById("amount").value;
 
-        strip.createPaymentMethod({
+        stripe.createPaymentMethod({
             type: 'card',
             card: card,
             billing_details: {
-                name: document.getElementById("cardholder-name").value,
+                email: document.getElementById("cardholder-email").value,
             },
         }).then(stripePaymentMethodHandler);
     }
@@ -128,9 +128,9 @@
         } else {
             let payload = {
                 plan: '{{ $widget.PlanID}}',
-                payment_method: result.payment_method.id,
+                payment_method: result.paymentMethod.id,
                 email: document.getElementById("cardholder-email").value,
-                last_four: result.payment_method.card.last4,
+                last_four: result.paymentMethod.card.last4,
             }
             const requestOptions = {
                 method: 'POST',
