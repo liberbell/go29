@@ -108,4 +108,16 @@ func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, 
 
 	okay := true
 	msg := ""
+
+	resp := jsonResponse{
+		OK:      okay,
+		Message: msg,
+	}
+	out, err := json.MarshalIndent(resp, "", "   ")
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
 }
