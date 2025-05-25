@@ -62,8 +62,15 @@ func (c *Card) RetrievePaymentIntent(id string) (*stripe.PaymentIntent, error) {
 	return pi, nil
 }
 
-func (c *Card) SubscribeToPlan(cust *stripe.Customer, plan, email, last4, cardType string) {
-
+func (c *Card) SubscribeToPlan(cust *stripe.Customer, plan, email, last4, cardType string) (string, error) {
+	stripeCustomerID := cust.ID
+	items := []*stripe.SubscriptionItemParams{
+		{Plan: stripe.String(plan)},
+	}
+	params := &stripe.SubscriptionParams{
+		Customer: stripe.String(stripeCustomerID),
+		Items:    items,
+	}
 }
 
 func (c *Card) CreateCustomer(pm, email string) (*stripe.Customer, string, error) {
