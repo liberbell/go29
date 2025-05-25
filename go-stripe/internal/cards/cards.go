@@ -71,7 +71,7 @@ func (c *Card) CreateCustomer(pm, email string) (*stripe.Customer, string, error
 			DefaultPaymentMethod: stripe.String(pm),
 		},
 	}
-	cus, err := customer.New(customerParams)
+	cust, err := customer.New(customerParams)
 	if err != nil {
 		msg := ""
 		if stripeErr, ok := err.(*stripe.Error); ok {
@@ -79,7 +79,7 @@ func (c *Card) CreateCustomer(pm, email string) (*stripe.Customer, string, error
 		}
 		return nil, msg, err
 	}
-	return cus, "", nil
+	return cust, "", nil
 }
 
 func cardErrorMessage(code stripe.ErrorCode) string {
