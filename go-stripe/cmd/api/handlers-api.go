@@ -124,10 +124,10 @@ func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, 
 		return
 	}
 
-	app.infoLog.Println("Subscription ")
+	app.infoLog.Println("Subscription id is ", subscriptionID)
 
 	okay := true
-	msg := ""
+	// msg := ""
 
 	resp := jsonResponse{
 		OK:      okay,
