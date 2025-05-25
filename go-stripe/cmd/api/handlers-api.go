@@ -111,12 +111,20 @@ func (app *application) CreateCustomerAndSubscribeToPlan(w http.ResponseWriter, 
 		Key:      app.config.stripe.key,
 		Currency: data.Currency,
 	}
+
+	stripeCustomer, msg, err := card.CreateCustomer(data.PaymentMethod, data.Email)
 	if err != nil {
 		app.errorLog.Println(err)
 		return
 	}
 
-	stripeCustomer, msg, err := card.CreateCustomer(data.PaymentMethod, data.Email)
+	subscriptionID, err := card.SubscribeToPlan(stripeCustomer, data.Plan, data.Email, data.LastFour, "")
+	if err != nil {
+		app.errorLog.Println(err)
+		return
+	}
+
+	app.infoLog.Println("Subscription ")
 
 	okay := true
 	msg := ""
